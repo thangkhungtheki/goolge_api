@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "axios": "^1.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "google-oauth-jwt": "^0.2.0",
+    "googleapis": "^126.0.1",
+    "hls-server": "^1.5.0",
+    "https": "^1.0.0",
+    "replaceall": "^0.1.6",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "cloudflare-scraper": "^2.0.0",
+    "got": "^13.0.0"
+  }
+}

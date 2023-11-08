@@ -1,0 +1,61 @@
+<video id="video-player" controls width="640" height="360"></video>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+    const videoElement = document.getElementById('video-player');
+    const m3u8URL = 'png/output.m3u8';
+    const hls = new Hls();
+    if (Hls.isSupported()) {
+       
+
+        hls.loadSource(m3u8URL);
+        hls.attachMedia(videoElement);
+
+        // hls.on(Hls.Events.MANIFEST_PARSED, function () {
+        //     // Khi tệp .m3u8 đã được phân tích xong, bắt đầu phát video
+        //     videoElement.play();
+        // });
+
+        hls.on(Hls.Events.FRAG_LOADED, function (event, data) {
+            // Xử lý dữ liệu đoạn .ts trước khi nó được phát
+            const tsData = data.payload;
+            
+            // Thực hiện xử lý dữ liệu .ts ở đây
+            // Cắt bớt 120 byte từ đầu đoạn .ts
+            const slicedData = tsData.slice(112);
+
+            // Tạo một Uint8Array từ dữ liệu đã cắt
+            const slicedUint8Array = new Uint8Array(slicedData);
+
+            // Tạo một blob từ Uint8Array
+            const slicedBlob = new Blob([slicedData], { type: 'video/mp2t' });
+
+            // Tạo URL cho blob
+            const slicedBlobURL = URL.createObjectURL(slicedBlob);
+
+            // Thay đổi nguồn video để phát tiếp tục từ đoạn .ts đã cắt
+            videoElement.src = slicedBlobURL;
+            
+            // Tiếp tục phát video
+            videoElement.play();
+        });
+
+        // hls.on(Hls.Events.ERROR, function (event, data) {
+        //     console.error('Lỗi HLS:', data.type, data.details);
+        // });
+    } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+        videoElement.src = m3u8URL;
+        videoElement.addEventListener('loadedmetadata', function () {
+            // Khi có metadata, bắt đầu phát video
+            videoElement.play();
+        });
+    } else {
+        console.error('Trình duyệt không hỗ trợ HLS');
+    }
+
+    
+//     hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+//         videoElement.play();
+// });
+</script>

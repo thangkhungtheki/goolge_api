@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video.js with HTTP Headers</title>
+
+    <!-- Thêm thư viện Video.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.0.0/video-js.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.0.0/video.min.js"></script>
+    <!-- Thêm thư viện jwplayer.js và thư viện chôm của animevietsub -->
+    <script src="jwplayer.js"></script>
+    <script src="https://cdn.jwplayer.com/libraries/hwjB6n5l.js"></script>
+    <!-- Thêm thư viện jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://lh3.googleusercontent.com">
+    <!-- File xử lý javascript api -->
+    <script src="xuly.js"></script>
+    
+    
+
+    <!-- Thêm plugin httpSourceSelector -->
+    <!-- <script src="https://unpkg.com/videojs-contrib-media-sources/dist/videojs-contrib-media-sources.min.js"></script> -->
+    
+</head>
+
+<body>
+    <!-- Phần tử để chứa video player -->
+    <video id="videoPlayer" class="video-js" controls width="600" height="360">
+        <!-- Đặt nguồn video -->
+    
+    </video>
+
+    <script>
+            // Khởi tạo Video.js player
+            // var player = videojs('videoPlayer');
+            // player.ready(()=>{
+            //     player.src('png/test.m3u8')
+            // })
+    
+            // player.ready(function () {               
+            //     player.tech_.hls.xhr.beforeRequest = function (options) {
+                    // options.headers = options.headers || {};
+                    // options.headers['Accept'] = '*/*';
+                    // options.headers['Accept-Encoding'] = 'gzip, deflate, br';
+                    // options.headers['Connection'] = 'keep-alive';
+                    // options.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/111.0';
+                    // options.headers['origin'] = 'https://animevietsub.fan';
+                    // options.headers['referer'] = 'https://animevietsub.fan/';
+                    
+                    // return options;
+                    // let a = $.post("e",
+                    //     {
+                    //         uri: e.uri,
+                    //     },
+                    //     function (data, status) {
+                    //         console.log(data.text())
+                    //     });
+                    
+        //             $.ajax({
+        //                 url: "e",
+        //                 type: "post",
+        //                 dataType: "text",
+        //                 data: {
+        //                     uri: options.uri
+        //                 },
+        //                 success: function (result) {
+        //                     let u = JSON.parse(result)
+        //                     console.log(u.uri)
+        //                     options.uri = options.uri.replace(options.uri, u.uri)
+                            
+        //                 }
+        //             });
+                    
+        //            console.log(options)
+        //            return options
+        //             setTimeout(1000)
+        //         };
+            
+        //     });
+        //                 // Bắt sự kiện trước khi yêu cầu tải segment
+                        
+        //         player.on('waiting', function (e) {
+        //                 // Kiểm tra URL của segment
+            
+
+        //     // Thực hiện xử lý trước khi tải segment ở đây
+            
+        //     // Nếu cần thay đổi URL hoặc thêm thông tin vào yêu cầu HTTP, bạn có thể làm ở đây.
+        //     // Ví dụ:
+        //     // event.uri = 'new-segment-url'; // Đổi URL của segment
+        //     // event.headers['Custom-Header'] = 'Value'; // Thêm header tùy chỉnh vào yêu cầu
+
+        //     // Tiếp tục yêu cầu ban đầu
+        //     //return event;
+        //     });
+
+        // player.on('error', (event) => {
+        //     console.log('Loi loi loi loi loi')
+        //     console.log(event)
+        // })
+
+        // const corsConfig = {
+        // allowCredentials: true, // Cho phép credentials (cần thiết nếu cần sử dụng cookies)
+        // withCredentials: true,  // Tương tự, cho phép sử dụng credentials
+        // crossOrigin: 'use-credentials',  // Sử dụng credentials khi gửi yêu cầu CORS
+        // redirectDomain: 'animevietsub.fan', // Tên miền giả
+        // };
+        // Thiết lập cấu hình CORS và tên miền giả
+        // player.handleManifestRedirects(corsConfig);
+        // Bắt đầu phát video
+        // player.play();
+        // Sử dụng plugin videojs-http-streaming
+        // player.ready(function () {
+        //     var options = {
+        //         withCredentials: true, // Cho phép sử dụng Cookie khi chuyển hướng
+        //         handleManifestRedirects: true, // Xử lý chuyển hướng trong tệp M3U8
+        //     };
+
+        //     player.src({
+        //         src: 'png/test.m3u8',
+        //         type: 'application/x-mpegURL',
+        //         // Cài đặt các tùy chọn
+        //         hls: options,
+        //     });
+
+        //     player.play();
+        // });
+        // Sử dụng plugin httpSourceSelector
+        // player.httpSourceSelector({
+        //     default: 'auto',
+        //     selectableSources: [
+        //         {
+        //             label: 'Auto',
+        //             src: 'png/test.m3u8',
+        //             type: 'application/x-mpegURL'
+        //         }
+        //     ],
+        //     middleware: (req, next) => {
+        //         // Thêm các header tùy chỉnh vào yêu cầu HTTP
+        //         req.headers['Accept'] = '*/*';
+        //         req.headers['Accept-Encoding'] = 'gzip, deflate, br';
+        //         req.headers['Connection'] = 'keep-alive';
+        //         req.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/111.0';
+        //         req.headers['origin'] = 'https://animevietsub.fan';
+        //         req.headers['referer'] = 'https://animevietsub.fan/';
+
+        //         // Tiếp tục với yêu cầu HTTP đã được tùy chỉnh
+        //         next(req);
+        //     }
+        // });
+    
+</script>
+
+    <script>
+        
+        // var playerInstance = jwplayer("videoPlayer");
+        // playerInstance.setup({
+        //     playlist: [{
+        //         sources: [{
+        //             file: "png/output.m3u8",
+        //             // onXhrOpen: function(xhr, url) {
+        //             //     if(url !== "png/output.m3u8"){
+        //             //         //console.log(url)
+        //             //         xhr._url = "127.0.0.1:3000/aaaa"
+        //             //         return xhr
+                            
+        //             //     }
+        //             // }
+                    
+        //         }]
+        //     }],
+        //     heigh: '360',
+        //     width: '640',
+            
+        // })
+        // .on('playlistItem',(e)=> {
+        //     //console.log(e)
+        // })
+        
+            
+        // playerInstance.setPlaylistItemCallback(function (item, index) {
+        //     console.log(item); 
+            // The playlist item that will be loaded
+            // console.log(index); // The playlist item’s index in the playlist
+
+            // return new Promise(function(resolve, reject) {
+            //     return doSomethingAsync(item).then(function(result) {
+            //         console.log(result)
+            //         resolve(result.modifiedItem);
+            //     })
+            // })
+        //})
+        
+        
+    
+</script>
+    
+    </body>
+    
+    </html>

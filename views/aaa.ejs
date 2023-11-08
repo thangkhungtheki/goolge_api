@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phát Video từ .mp4 (bắt đầu từ byte 120)</title>
+</head>
+<body>
+    <video controls width="640" height="360"></video>
+    <script>
+        const videoElement = document.querySelector('video');
+
+        async function playVideoFromMp4(mp4URL) {
+            try {
+                const mp4Response = await fetch(mp4URL);
+                const mp4ArrayBuffer = await mp4Response.arrayBuffer();
+                //const pngData = new Uint8Array(mp4ArrayBuffer, 120, mp4ArrayBuffer.byteLength -1  )
+                // Tạo một Uint8Array từ dữ liệu .mp4
+                const mp4Uint8Array = new Uint8Array(mp4ArrayBuffer);
+
+                // Tạo một ArrayBuffer mới từ byte thứ 120 đến cuối của .mp4
+                //const mp4Data = mp4Uint8Array.slice(120).buffer;
+
+                // Tạo Blob từ ArrayBuffer
+                const mp4Blob = new Blob([mp4Uint8Array], {type: "video/mp2t"});
+
+                // Tạo URL cho tệp .mp4
+                const mp4URLs = URL.createObjectURL(mp4Blob);
+
+                // Gán URL cho video element
+                videoElement.src = mp4URLs;
+                
+            } catch (error) {
+                console.error('Đã xảy ra lỗi: ', error);
+            }
+        }
+
+        // Thay đổi đường dẫn dưới đây bằng đường dẫn thực tế của tệp .mp4
+        const mp4URL = 'segment_000.ts';
+        playVideoFromMp4(mp4URL);
+        
+    </script>
+</body>
+</html>
