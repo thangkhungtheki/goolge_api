@@ -57,7 +57,8 @@ app.get('/g',  async (req, res) => { // Queue parrams: 127.0.0.1:3000/g?idunique
     //console.log(_data_m3u8)
     // res.set('Content-Disposition', 'attachment; filename="file.m3u8"');
     // res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
-    res.send(_data_m3u8) // return text ?
+    // res.sendFile(__dirname + '\\png\\auto.m3u8') // return text ?
+    res.send(_data_m3u8)
 })
 
 app.get("/seprate-thread", (req, res) => {
