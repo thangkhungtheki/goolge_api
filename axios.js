@@ -110,13 +110,17 @@ function doc_xuly_m3u8_new(link) {
       let urlendpoint = '//127.0.0.1:3000'
       if (data) {
         var _datanew = replaceall('//', urlendpoint + '/f?url=//', data)
-        fs.writeFileSync('png/auto.m3u8', _datanew, 'utf-8', (err) => {
-          if (err) {
-            console.log('Lỗi ghi file !!!')
-          } else {
-            console.log('Đã lưu thành công !!!')
-          }
-        })
+
+        // Ghi ra file trên server backend
+        // ---------------------------------------------
+        // fs.writeFileSync('png/auto.m3u8', _datanew, 'utf-8', (err) => {
+        //   if (err) {
+        //     console.log('Lỗi ghi file !!!')
+        //   } else {
+        //     console.log('Đã lưu thành công !!!')
+        //   }
+        // })
+        // ---------------------------------------------
       }
 
       //console.log(_datanew)
