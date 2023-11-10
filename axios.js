@@ -107,7 +107,7 @@ function doc_xuly_m3u8_new(link) {
     .then(response => {
       //console.log(response.data)
       let data = response.data
-      let urlendpoint = '//127.0.0.1:5002'
+      let urlendpoint = '//127.0.0.1:3000'
       if (data) {
         var _datanew = replaceall('//', urlendpoint + '/f?url=//', data)
         fs.writeFileSync('png/auto.m3u8', _datanew, 'utf-8', (err) => {

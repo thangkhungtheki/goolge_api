@@ -55,8 +55,8 @@ app.get('/g',  async (req, res) => { // Queue parrams: 127.0.0.1:3000/g?idunique
     let _data_m3u8 = await getLh3.doc_xuly_m3u8_new(_linkm3u8)
     
     //console.log(_data_m3u8)
-    // res.set('Content-Disposition', 'attachment; filename="file.m3u8"');
-    // res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
+    res.set('Content-Disposition', 'attachment; filename="file.m3u8"');
+    res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
     // res.sendFile(__dirname + '\\png\\auto.m3u8') // return text ?
     res.send(_data_m3u8)
 })
